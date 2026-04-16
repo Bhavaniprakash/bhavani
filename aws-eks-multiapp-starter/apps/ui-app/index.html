@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi App Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">AWS EKS Multi-App Starter</p>
+      <h1>Frontend connected to four backend services</h1>
+      <p class="intro">This UI calls Spring Boot and Quarkus services through the same domain using ingress paths.</p>
+    </section>
+    <section class="grid">
+      <article class="card" data-app="app1">
+        <h2>App 1</h2>
+        <p>Spring Boot backend</p>
+        <button type="button">Call `/app1`</button>
+        <pre>Waiting...</pre>
+      </article>
+      <article class="card" data-app="app2">
+        <h2>App 2</h2>
+        <p>Spring Boot backend</p>
+        <button type="button">Call `/app2`</button>
+        <pre>Waiting...</pre>
+      </article>
+      <article class="card" data-app="app3">
+        <h2>App 3</h2>
+        <p>Quarkus backend</p>
+        <button type="button">Call `/app3`</button>
+        <pre>Waiting...</pre>
+      </article>
+      <article class="card" data-app="app4">
+        <h2>App 4</h2>
+        <p>Quarkus backend</p>
+        <button type="button">Call `/app4`</button>
+        <pre>Waiting...</pre>
+      </article>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

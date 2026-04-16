@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app4
+  namespace: multi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app4
+  template:
+    metadata:
+      labels:
+        app: app4
+    spec:
+      containers:
+        - name: app4
+          image: your-aws-account-id.dkr.ecr.us-east-1.amazonaws.com/app4:latest
+          ports:
+            - containerPort: 8080

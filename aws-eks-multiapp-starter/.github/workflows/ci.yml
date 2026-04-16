@@ -1,0 +1,53 @@
+name: Build All Apps
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - app_name: ui-app
+            app_path: apps/ui-app
+            image_name: ui-app
+          - app_name: app1
+            app_path: apps/app1
+            image_name: app1
+          - app_name: app2
+            app_path: apps/app2
+            image_name: app2
+          - app_name: app3
+            app_path: apps/app3
+            image_name: app3
+          - app_name: app4
+            app_path: apps/app4
+            image_name: app4
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Set up Java
+        if: matrix.app_name != 'ui-app'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Build Java app
+        if: matrix.app_name != 'ui-app'
+        working-directory: ${{ matrix.app_path }}
+        run: mvn clean package -DskipTests
+
+      - name: Build Linux Docker image
+        working-directory: ${{ matrix.app_path }}
+        run: docker buildx build --platform linux/amd64 --load -t ${{ matrix.image_name }}:${{ github.sha }} .

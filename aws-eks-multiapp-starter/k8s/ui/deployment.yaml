@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-app
+  namespace: multi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui-app
+  template:
+    metadata:
+      labels:
+        app: ui-app
+    spec:
+      containers:
+        - name: ui-app
+          image: your-aws-account-id.dkr.ecr.us-east-1.amazonaws.com/ui-app:latest
+          ports:
+            - containerPort: 8080
